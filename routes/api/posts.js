@@ -24,7 +24,7 @@ router.post('/', passport.authenticate('jwt',{session: false}), async(req, res) 
 
 router.get('/', passport.authenticate('jwt',{session: false}), async(req, res) => {
     const posts = await Post.find({user: req.user})
-    res.json(posts)
+    return res.json(posts)
 })
 
 

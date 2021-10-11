@@ -3,17 +3,44 @@ import axios from 'axios'
 import './dashboard.css'
 
 const Dashboard = () => {
-    const [text, settext] = useState('')
+    const [text, setText] = useState('')
     const [post, setPost] = useState([])
+    const [token, setToken] = useState('')
     useEffect(() => {
-        const fetchData = async () => {
-            const res = axios.get('/api/post')
-            console.log(res.data)
+        const fetchData = async() => {
+            const token = localStorage.getItem('jwtToken')
+            try {
+                const res = await axios.get('/api/post', {
+                    headers: {
+                        "Authorization": token
+                    }
+                })
+                setPost(res.data)
+            }catch(err) {
+                console.log(err)
+            }
+            
         }
         fetchData()
     }, [])
     const onSubmit = async (e) => {
         e.preventDefault()
+        const newPost = {
+            text,
+            mediaLink: '',
+            mediaType: ''
+        }
+        try {
+            const token = localStorage.getItem('jwtToken')
+            const res = await axios.post('/api/post', newPost, {
+                headers:{
+                    "Authorization": token
+                }
+            })
+            console.log(res.data)
+        }catch (err) {
+            console.log(err.response)
+        }
     }
     return (
         <div className="dashboard">
@@ -25,14 +52,18 @@ const Dashboard = () => {
                             required
                             placeholder="Enter text"
                             value={text}
-                            onChange={(e) => settext(e.target.value)}
+                            onChange={(e) => setText(e.target.value)}
                         />
                         <input type="submit" />
                     </form>
                 </div>
             </div>
             <div className="dashboard__output">
-            
+                {post.map((element) => {
+                    return (
+                        <div>{element.text}</div>
+                    )
+                })}
             </div>
         </div>
     )
