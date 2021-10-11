@@ -18,9 +18,9 @@ const Signup = () => {
             email,
             password
         }
-        console.log(newUser)
         try {
             const res = await axios.post('/api/user/signup', newUser)
+            window.location = '/signin'
         }catch(err){
             console.log(err.response)
         }

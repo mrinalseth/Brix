@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import {setAuthToken} from '../setTokenAuth'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-
 import './signin.css'
+import { Redirect } from 'react-router'
 
 const Signin = () => {
     const [email ,setEmail] = useState('')
@@ -22,6 +22,7 @@ const Signin = () => {
             localStorage.setItem('jwtToken', res.data.token)
             setAuthToken(res.data.token)
             const decoded = jwt_decode(res.data.token)
+            window.location = '/dashboard'
 
         }catch (err) {
             console.log(err.response)
