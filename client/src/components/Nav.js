@@ -3,8 +3,11 @@ import './nav.css'
 
 const Nav = () => {
     return (
-        <div>
-            Nav bar
+        <div className="nav">
+            <div className="nav__options">
+                <p className="option signup">Sign up</p>
+                <p className="option signin">Login</p>
+            </div>
         </div>
     )
 }
