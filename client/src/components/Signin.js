@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {setAuthToken} from '../setTokenAuth'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
+
 import './signin.css'
 
 const Signin = () => {
@@ -21,6 +22,7 @@ const Signin = () => {
             localStorage.setItem('jwtToken', res.data.token)
             setAuthToken(res.data.token)
             const decoded = jwt_decode(res.data.token)
+
         }catch (err) {
             console.log(err.response)
         }

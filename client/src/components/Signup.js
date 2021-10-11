@@ -1,30 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import './signup.css'
 
 const Signup = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const onSubmit = async (e) => {
+        if(password != password2){
+            alert('Password must match')
+            return
+        }
+        e.preventDefault()
+        const newUser = {
+            name,
+            email,
+            password
+        }
+        console.log(newUser)
+        try {
+            const res = await axios.post('/api/user/signup', newUser)
+        }catch(err){
+            console.log(err.response)
+        }
+    }
     return (
         <div className="__signup">
-            <form id="form" class="form">
-                <h2>Register</h2>
+            <form id="form" class="form" onSubmit={onSubmit}>
+                <h2>Sign Up</h2>
                 <div class="form-control">
                     <label for="username">Username</label>
-                    <input type="text" name="" id="username" placeholder="Enter username"/>
-                    <small>Error msg</small>
+                    <input 
+                        required
+                        type="text" 
+                        id="username" 
+                        placeholder="Enter username"
+                        value={name}    
+                        onChange={(e) => setName(e.target.value)}
+                    />
                 </div>
                 <div class="form-control">
                     <label for="email">Email</label>
-                    <input type="text" name="" id="email" placeholder="Enter email"/>
-                    <small>Error msg</small>
+                    <input 
+                        required
+                        type="text" 
+                        id="email" 
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </div>
                 <div class="form-control">
                     <label for="password">Password</label>
-                    <input type="password" name="" id="password" placeholder="Enter password"/>
-                    <small>Error msg</small>
+                    <input 
+                        required
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}    
+                    />
                 </div>
                 <div class="form-control">
                     <label for="password2">Comfirm password</label>
-                    <input type="text" name="" id="password2" placeholder="Enter passwordagain"/>
-                    <small>Error msg</small>
+                    <input 
+                        required
+                        type="text" 
+                        id="password2" 
+                        placeholder="Enter passwordagain"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}    
+                    />
                 </div>
                 <button>Submit</button>
             </form>
