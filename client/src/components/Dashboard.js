@@ -5,7 +5,6 @@ import './dashboard.css'
 const Dashboard = () => {
     const [text, setText] = useState('')
     const [post, setPost] = useState([])
-    const [token, setToken] = useState('')
     useEffect(() => {
         const fetchData = async() => {
             const token = localStorage.getItem('jwtToken')
@@ -22,7 +21,7 @@ const Dashboard = () => {
             
         }
         fetchData()
-    }, [])
+    }, [post])
     const onSubmit = async (e) => {
         e.preventDefault()
         const newPost = {
@@ -37,7 +36,7 @@ const Dashboard = () => {
                     "Authorization": token
                 }
             })
-            console.log(res.data)
+            setText('')
         }catch (err) {
             console.log(err.response)
         }
@@ -48,20 +47,21 @@ const Dashboard = () => {
                 <div className="text">
                     <form onSubmit={onSubmit}>
                         <input 
+                            id="field"
                             type="text"  
                             required
                             placeholder="Enter text"
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                         />
-                        <input type="submit" />
+                        <input id="submit" type="submit" />
                     </form>
                 </div>
             </div>
             <div className="dashboard__output">
                 {post.map((element) => {
                     return (
-                        <div>{element.text}</div>
+                        <div className="text">{element.text}</div>
                     )
                 })}
             </div>

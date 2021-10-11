@@ -19,7 +19,7 @@ const Signin = () => {
             window.location = '/dashboard'
 
         }catch (err) {
-            console.log(err.response)
+            alert(JSON.stringify(err.response.data))
         }
     }
     return (

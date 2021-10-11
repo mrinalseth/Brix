@@ -1,6 +1,5 @@
 .dashboard__output {
     padding: 25px;
-    overflow: scroll;
 }
 
 .dashboard__output > .text {

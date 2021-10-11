@@ -22,7 +22,7 @@ const Signup = () => {
             const res = await axios.post('/api/user/signup', newUser)
             window.location = '/signin'
         }catch(err){
-            console.log(err.response)
+            alert(JSON.stringify(err.response.data))
         }
     }
     return (
@@ -68,7 +68,7 @@ const Signup = () => {
                         required
                         type="text" 
                         id="password2" 
-                        placeholder="Enter passwordagain"
+                        placeholder="Enter password again"
                         value={password2}
                         onChange={(e) => setPassword2(e.target.value)}    
                     />
