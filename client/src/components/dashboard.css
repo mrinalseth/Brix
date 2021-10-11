@@ -1,0 +1,38 @@
+.dashboard__output {
+    padding: 25px;
+    overflow: scroll;
+}
+
+.dashboard__output > .text {
+    background-color: rgb(90, 221, 238);
+    margin: 25px;
+    width: 25%;
+    height: 50px;
+    padding: 10px;
+    float: left;
+    border-radius: 10px;
+}
+.dashboard__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#field {
+    border: none;
+    height: 50px;
+    width: 250px;
+    margin-right: 10px;
+    background-color: rgb(175, 234, 245);
+    border-radius: 5px;
+}
+#field::placeholder {
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#submit{
+    height: 50px;
+    width: 100px;
+}
